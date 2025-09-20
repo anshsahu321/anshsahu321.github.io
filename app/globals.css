@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-terminal-bg text-terminal-text font-mono;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .terminal-window {
+    @apply bg-terminal-bg border border-terminal-green rounded-lg shadow-2xl;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+  }
+
+  .terminal-header {
+    @apply bg-terminal-gray border-b border-terminal-green px-4 py-2 rounded-t-lg;
+  }
+
+  .terminal-body {
+    @apply p-4 min-h-screen;
+  }
+
+  .command-input {
+    @apply bg-transparent border-none outline-none text-terminal-green font-mono w-full;
+  }
+
+  .command-output {
+    @apply text-terminal-text font-mono whitespace-pre-wrap;
+  }
+
+  .glow-text {
+    @apply text-terminal-green;
+    text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41, 0 0 15px #00ff41;
+  }
+
+  .profile-card {
+    @apply bg-terminal-gray border border-terminal-green rounded-lg p-6 shadow-lg;
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+  }
+
+  .skill-tag {
+    @apply bg-terminal-darkGreen text-terminal-bg px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .project-card {
+    @apply bg-terminal-gray border border-terminal-green rounded-lg p-4 hover:shadow-lg transition-all duration-300;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.1);
+  }
+
+  .project-card:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    transform: translateY(-2px);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00ff41;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00cc33;
+}
+
+/* Cursor animation */
+.cursor::after {
+  content: '█';
+  color: #00ff41;
+  animation: cursor-blink 1s infinite;
+}
+
+/* Matrix rain effect */
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.1;
+}
