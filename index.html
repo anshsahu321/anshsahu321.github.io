@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansh Sahu's Terminal Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #0a0a0a;
+            color: #00ff41;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .terminal-window {
+            max-width: 1200px;
+            margin: 20px auto;
+            border: 2px solid #00ff41;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+
+        .terminal-header {
+            background-color: #1a1a1a;
+            border-bottom: 2px solid #00ff41;
+            padding: 15px 20px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .terminal-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+        }
+
+        .red { background-color: #ff5f57; }
+        .yellow { background-color: #ffbd2e; }
+        .green { background-color: #28ca42; }
+
+        .terminal-title {
+            color: #00ff41;
+            font-weight: bold;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            min-height: 600px;
+            background-color: #0a0a0a;
+        }
+
+        .welcome-message {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .glow-text {
+            color: #00ff41;
+            text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41, 0 0 15px #00ff41;
+        }
+
+        .command-line {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .prompt {
+            color: #00ff41;
+            margin-right: 10px;
+        }
+
+        .command-input {
+            background: transparent;
+            border: none;
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            outline: none;
+            flex: 1;
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .output {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .profile-card {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            width: 300px;
+            background-color: #1a1a1a;
+            border: 2px solid #00ff41;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background-color: #00ff41;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0a0a0a;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .name {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .title {
+            text-align: center;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-link {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-link:hover {
+            color: #00ff41;
+        }
+
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .help-section {
+            margin: 20px 0;
+        }
+
+        .command-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .command-item {
+            padding: 8px;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 5px;
+        }
+
+        .command-name {
+            color: #00ff41;
+            font-weight: bold;
+        }
+
+        .command-desc {
+            color: #888;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .profile-card {
+                position: relative;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Background -->
+    <canvas class="matrix-bg" id="matrixCanvas"></canvas>
+
+    <!-- Profile Card -->
+    <div class="profile-card">
+        <div class="avatar">AS</div>
+        <div class="name">Ansh Sahu</div>
+        <div class="title">Software & AI Engineer</div>
+        <div class="contact-info">📍 Assam, India</div>
+        <div class="contact-info">📧 as.shawansh@gmail.com</div>
+        <div class="social-links">
+            <a href="https://github.com/anshsahu321" class="social-link">GitHub</a>
+            <a href="https://www.linkedin.com/in/ansh-sahu-995803357" class="social-link">LinkedIn</a>
+            <a href="https://twitter.com/anshsahu321" class="social-link">Twitter</a>
+        </div>
+    </div>
+
+    <!-- Terminal Window -->
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <div class="terminal-controls">
+                <div class="control-btn red"></div>
+                <div class="control-btn yellow"></div>
+                <div class="control-btn green"></div>
+            </div>
+            <div class="terminal-title">terminal-portfolio</div>
+            <div></div>
+        </div>
+
+        <div class="terminal-body">
+            <div class="welcome-message">
+                <div class="glow-text" style="font-size: 24px; margin-bottom: 10px;">
+                    Welcome to Ansh Sahu's Terminal Portfolio
+                </div>
+                <div style="color: #888; margin-bottom: 15px;">
+                    AI-powered interactive portfolio terminal
+                </div>
+                <div style="color: #00ff41; margin-bottom: 10px;">
+                    Type 'help' to see available commands or 'about' to learn more about me.
+                </div>
+                <div style="color: #888; font-size: 14px;">
+                    Last login: <span id="currentTime"></span>
+                </div>
+            </div>
+
+            <div id="terminalOutput">
+                <div class="output">
+                    <span class="prompt">$</span> <span class="command-input">help</span>
+                    <div class="help-section">
+                        <div class="glow-text" style="font-size: 18px; margin-bottom: 15px;">Available Commands:</div>
+                        <div class="command-list">
+                            <div class="command-item">
+                                <div class="command-name">help</div>
+                                <div class="command-desc">Show available commands</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">about</div>
+                                <div class="command-desc">Display personal information</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">projects</div>
+                                <div class="command-desc">List all projects</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">skills</div>
+                                <div class="command-desc">Show technical skills</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">experience</div>
+                                <div class="command-desc">Display work experience</div>
+                            </div>
+                            <div class="command-name">education</div>
+                                <div class="command-desc">Show educational background</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">contact</div>
+                                <div class="command-desc">Get contact information</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">whoami</div>
+                                <div class="command-desc">Display current user</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="command-line">
+                <span class="prompt">$</span>
+                <input type="text" class="command-input" id="commandInput" placeholder="Type a command..." autofocus>
+                <span class="cursor">█</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+        const charArray = chars.split('');
+        
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+        
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+        
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(10, 10, 10, 0.04)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00ff41';
+            ctx.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        
+        setInterval(drawMatrix, 50);
+        
+        // Terminal Commands
+        const commandInput = document.getElementById('commandInput');
+        const terminalOutput = document.getElementById('terminalOutput');
+        
+        function addOutput(command, output) {
+            const outputDiv = document.createElement('div');
+            outputDiv.className = 'output';
+            outputDiv.innerHTML = `
+                <span class="prompt">$</span> ${command}
+                <div style="margin-top: 10px;">${output}</div>
+            `;
+            terminalOutput.appendChild(outputDiv);
+        }
+        
+        function processCommand(command) {
+            const cmd = command.toLowerCase().trim();
+            
+            switch(cmd) {
+                case 'help':
+                    return `
+                        <div class="glow-text" style="font-size: 18px; margin-bottom: 15px;">Available Commands:</div>
+                        <div class="command-list">
+                            <div class="command-item">
+                                <div class="command-name">help</div>
+                                <div class="command-desc">Show available commands</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">about</div>
+                                <div class="command-desc">Display personal information</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">projects</div>
+                                <div class="command-desc">List all projects</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">skills</div>
+                                <div class="command-desc">Show technical skills</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">experience</div>
+                                <div class="command-desc">Display work experience</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">education</div>
+                                <div class="command-desc">Show educational background</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">contact</div>
+                                <div class="command-desc">Get contact information</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">whoami</div>
+                                <div class="command-desc">Display current user</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">date</div>
+                                <div class="command-desc">Show current date and time</div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-name">clear</div>
+                                <div class="command-desc">Clear the terminal</div>
+                            </div>
+                        </div>
+                    `;
+                    
+                case 'about':
+                    return `
+                        <div class="glow-text" style="font-size: 20px; margin-bottom: 10px;">Ansh Sahu</div>
+                        <div class="glow-text" style="font-size: 16px; margin-bottom: 15px;">Software & AI Engineer</div>
+                        <div style="margin-bottom: 15px;">Passionate Computer Science student and software developer from Assam, India. Specializing in full-stack web development with modern technologies like React, Next.js, and Node.js. Love building innovative solutions and continuously learning new technologies.</div>
+                        <div style="margin: 10px 0;"><strong>Location:</strong> Assam, India</div>
+                        <div style="margin: 10px 0;"><strong>Email:</strong> as.shawansh@gmail.com</div>
+                        <div style="margin: 10px 0;"><strong>Social Links:</strong></div>
+                        <div style="margin: 5px 0;">• <a href="https://github.com/anshsahu321" style="color: #00ff41;">GitHub</a></div>
+                        <div style="margin: 5px 0;">• <a href="https://www.linkedin.com/in/ansh-sahu-995803357" style="color: #00ff41;">LinkedIn</a></div>
+                        <div style="margin: 5px 0;">• <a href="https://twitter.com/anshsahu321" style="color: #00ff41;">Twitter</a></div>
+                    `;
+                    
+                case 'projects':
+                    return `
+                        <div class="glow-text" style="font-size: 18px; margin-bottom: 15px;">Projects (4)</div>
+                        <div style="margin: 15px 0; padding: 15px; background-color: #1a1a1a; border: 1px solid #333; border-radius: 5px;">
+                            <div class="glow-text" style="font-size: 16px;">Interactive Terminal Portfolio</div>
+                            <div style="margin: 5px 0; color: #888;">A modern, interactive portfolio built with Next.js and TypeScript, featuring a terminal interface with AI-powered interactions and smooth animations.</div>
+                            <div style="margin: 5px 0;"><strong>Technologies:</strong> Next.js, TypeScript, Tailwind CSS, Framer Motion, React</div>
+                        </div>
+                        <div style="margin: 15px 0; padding: 15px; background-color: #1a1a1a; border: 1px solid #333; border-radius: 5px;">
+                            <div class="glow-text" style="font-size: 16px;">E-Commerce Platform</div>
+                            <div style="margin: 5px 0; color: #888;">Full-stack e-commerce application with user authentication, payment integration, and admin dashboard.</div>
+                            <div style="margin: 5px 0;"><strong>Technologies:</strong> React, Node.js, Express.js, MongoDB, Stripe API</div>
+                        </div>
+                        <div style="margin: 15px 0; padding: 15px; background-color: #1a1a1a; border: 1px solid #333; border-radius: 5px;">
+                            <div class="glow-text" style="font-size: 16px;">Task Management System</div>
+                            <div style="margin: 5px 0; color: #888;">Collaborative task management tool with real-time updates, drag-and-drop functionality, and team collaboration features.</div>
+                            <div style="margin: 5px 0;"><strong>Technologies:</strong> Vue.js, Socket.io, PostgreSQL, Redis, Docker</div>
+                        </div>
+                        <div style="margin: 15px 0; padding: 15px; background-color: #1a1a1a; border: 1px solid #333; border-radius: 5px;">
+                            <div class="glow-text" style="font-size: 16px;">Weather Forecast App</div>
+                            <div style="margin: 5px 0; color: #888;">Responsive weather application with location-based forecasts, interactive maps, and detailed weather analytics.</div>
+                            <div style="margin: 5px 0;"><strong>Technologies:</strong> React, OpenWeather API, Chart.js, Geolocation API</div>
+                        </div>
+                    `;
+                    
+                case 'skills':
+                    return `
+                        <div class="glow-text" style="font-size: 18px; margin-bottom: 15px;">Technical Skills</div>
+                        <div style="margin: 10px 0;"><strong>Frontend Development:</strong> React, Next.js, TypeScript, JavaScript, Tailwind CSS, HTML5, CSS3, Vue.js</div>
+                        <div style="margin: 10px 0;"><strong>Backend Development:</strong> Node.js, Express.js, Python, FastAPI, RESTful APIs, GraphQL, Serverless</div>
+                        <div style="margin: 10px 0;"><strong>Database & Storage:</strong> MongoDB, PostgreSQL, MySQL, Redis, Firebase, Supabase, Prisma ORM</div>
+                        <div style="margin: 10px 0;"><strong>Cloud & DevOps:</strong> AWS, Vercel, Netlify, Docker, GitHub Actions, CI/CD, Linux</div>
+                        <div style="margin: 10px 0;"><strong>Mobile Development:</strong> React Native, Flutter, Progressive Web Apps, Responsive Design</div>
+                        <div style="margin: 10px 0;"><strong>Development Tools:</strong> Git, VS Code, Figma, Postman, Jest, Cypress, Webpack, Babel</div>
+                    `;
+                    
+                case 'experience':
+                    return `
+                        <div class="glow-text" style="font-size: 18px; margin-bottom: 15px;">Work Experience</div>
+                        <div style="margin: 15px 0; padding: 15px; background-color: #1a1a1a; border: 1px solid #333; border-radius: 5px;">
+                            <div class="glow-text" style="font-size: 16px;">Freelance Software Developer</div>
+                            <div style="margin: 5px 0; color: #888;">Full Stack Developer | 2023 - Present</div>
+                            <div style="margin: 5px 0;">Developing custom web applications and mobile solutions for clients across various industries. Specializing in modern JavaScript frameworks and cloud deployment strategies.</div>
+                            <div style="margin: 5px 0;"><strong>Technologies:</strong> React, Next.js, Node.js, MongoDB, Vercel, TypeScript</div>
+                        </div>
+                        <div style="margin: 15px 0; padding: 15px; background-color: #1a1a1a; border: 1px solid #333; border-radius: 5px;">
+                            <div class="glow-text" style="font-size: 16px;">Personal Projects & Learning</div>
+                            <div style="margin: 5px 0; color: #888;">Software Developer | 2022 - Present</div>
+                            <div style="margin: 5px 0;">Building innovative projects and continuously learning new technologies. Focus on full-stack development, modern web technologies, and best practices.</div>
+                            <div style="margin: 5px 0;"><strong>Technologies:</strong> React, Vue.js, Python, PostgreSQL, Docker, AWS</div>
+                        </div>
+                    `;
+                    
+                case 'education':
+                    return `
+                        <div class="glow-text" style="font-size: 18px; margin-bottom: 15px;">Education</div>
+                        <div style="margin: 15px 0; padding: 15px; background-color: #1a1a1a; border: 1px solid #333; border-radius: 5px;">
+                            <div class="glow-text" style="font-size: 16px;">Computer Science Engineering</div>
+                            <div style="margin: 5px 0; color: #888;">Bachelor of Technology (B.Tech) | 2020 - 2024</div>
+                            <div style="margin: 5px 0;">Pursuing degree in Computer Science with focus on software engineering, algorithms, data structures, and modern web technologies.</div>
+                        </div>
+                        <div style="margin: 15px 0; padding: 15px; background-color: #1a1a1a; border: 1px solid #333; border-radius: 5px;">
+                            <div class="glow-text" style="font-size: 16px;">Online Learning & Certifications</div>
+                            <div style="margin: 5px 0; color: #888;">Full Stack Development | 2022 - Present</div>
+                            <div style="margin: 5px 0;">Self-directed learning in modern web development, including React, Node.js, cloud technologies, and best practices through online platforms.</div>
+                        </div>
+                    `;
+                    
+                case 'contact':
+                    return `
+                        <div class="glow-text" style="font-size: 18px; margin-bottom: 15px;">Get In Touch</div>
+                        <div style="margin: 10px 0;"><strong>Email:</strong> <a href="mailto:as.shawansh@gmail.com" style="color: #00ff41;">as.shawansh@gmail.com</a></div>
+                        <div style="margin: 10px 0;"><strong>Location:</strong> Assam, India</div>
+                        <div style="margin: 10px 0;"><strong>GitHub:</strong> <a href="https://github.com/anshsahu321" style="color: #00ff41;">github.com/anshsahu321</a></div>
+                        <div style="margin: 10px 0;"><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ansh-sahu-995803357" style="color: #00ff41;">linkedin.com/in/ansh-sahu-995803357</a></div>
+                        <div style="margin: 10px 0;"><strong>Twitter:</strong> <a href="https://twitter.com/anshsahu321" style="color: #00ff41;">@anshsahu321</a></div>
+                        <div style="margin: 15px 0; padding: 15px; background-color: #1a1a1a; border: 1px solid #333; border-radius: 5px;">
+                            <div style="margin: 5px 0;">I'm always interested in hearing about new opportunities, interesting projects, or just having a chat about technology. Feel free to reach out through any of the channels above!</div>
+                            <div style="margin: 5px 0; color: #888; font-size: 14px;"><strong>Response Time:</strong> Usually within 24 hours</div>
+                        </div>
+                    `;
+                    
+                case 'whoami':
+                    return `
+                        <div class="glow-text" style="font-size: 16px; margin-bottom: 10px;">Current User:</div>
+                        <div style="margin: 5px 0;">Ansh Sahu</div>
+                        <div style="margin: 5px 0; color: #888; font-size: 14px;">Software & AI Engineer | Assam, India</div>
+                    `;
+                    
+                case 'date':
+                    return new Date().toLocaleString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        timeZoneName: 'short'
+                    });
+                    
+                case 'clear':
+                    terminalOutput.innerHTML = '';
+                    return '';
+                    
+                default:
+                    return `Command '${command}' not found. Type 'help' to see available commands.`;
+            }
+        }
+        
+        commandInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const command = commandInput.value;
+                if (command.trim()) {
+                    addOutput(command, processCommand(command));
+                    commandInput.value = '';
+                    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+                }
+            }
+        });
+        
+        // Update current time
+        document.getElementById('currentTime').textContent = new Date().toLocaleString();
+        
+        // Auto-focus on input
+        commandInput.focus();
+    </script>
+</body>
+</html>
