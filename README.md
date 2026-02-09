@@ -2,7 +2,7 @@
 
 A modern, interactive terminal-style portfolio showcasing my professional journey as a Full Stack Developer with expertise in Web3, AI, and modern web technologies.
 
-![Profile](assets/profile.png)
+
 
 ---
 
