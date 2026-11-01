@@ -42,7 +42,20 @@ class PortfolioTerminal {
         this.init();
     }
 
+    focusInput() {
+        // On phones, focusing the input opens the keyboard and covers half the screen.
+        // So only focus automatically on devices with a mouse.
+        if (!this.isTouch) this.input.focus();
+    }
+
     init() {
+        this.isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+        // Shorter placeholder so it fits on a phone
+        if (window.innerWidth <= 768) {
+            this.input.placeholder = 'Type a command...';
+        }
+
         // Ensure input element exists
         if (!this.input) {
             console.error('Terminal input element not found!');
@@ -53,8 +66,8 @@ class PortfolioTerminal {
         this.input.addEventListener('keydown', this.handleKeyDown.bind(this));
         this.input.addEventListener('input', this.handleInput.bind(this));
 
-        // Force focus on input
-        this.input.focus();
+        // Force focus on input (desktop only)
+        this.focusInput();
         this.input.disabled = false;
 
         // Keep input focused
@@ -62,9 +75,12 @@ class PortfolioTerminal {
             if (!e.target.classList.contains('nav-cmd') &&
                 !e.target.closest('.interactive-card') &&
                 !this.aiTyping) {
-                setTimeout(() => this.input.focus(), 10);
+                setTimeout(() => this.focusInput(), 10);
             }
         });
+
+        // Tap on the input line to start typing (works on phones too)
+        document.querySelector('.input-line').addEventListener('click', () => this.input.focus());
 
         // Navigation command handlers
         document.querySelectorAll('.nav-cmd').forEach(cmd => {
@@ -205,7 +221,7 @@ class PortfolioTerminal {
         this.input.value = '';
 
         setTimeout(() => {
-            this.input.focus();
+            this.focusInput();
         }, 100);
     }
 
@@ -224,7 +240,7 @@ class PortfolioTerminal {
         }
 
         setTimeout(() => {
-            this.input.focus();
+            this.focusInput();
         }, 100);
     }
 
@@ -284,6 +300,7 @@ class PortfolioTerminal {
             <div class="output-command">ansh@portfolio:~$ ${command}</div>
         `;
         this.output.appendChild(commandBlock);
+        this.lastCommandBlock = commandBlock;
     }
 
     addOutput(content) {
@@ -294,20 +311,28 @@ class PortfolioTerminal {
     }
 
     scrollToBottom() {
-        this.output.scrollTop = this.output.scrollHeight;
+        // The scrolling element is .terminal-body. Show the start of the new output
+        // so long answers (projects, experience) are read from the top.
+        const body = this.output.closest('.terminal-body');
+        if (!body) return;
+        if (this.lastCommandBlock && this.lastCommandBlock.isConnected) {
+            body.scrollTo({ top: Math.max(this.lastCommandBlock.offsetTop - 10, 0), behavior: 'smooth' });
+        } else {
+            body.scrollTo({ top: 0 });
+        }
     }
 
     initCardInteraction() {
         if (!this.card) return;
 
-        this.card.addEventListener('mousedown', (e) => {
+        this.card.addEventListener('pointerdown', (e) => {
             this.isDragging = true;
             this.mouseX = e.clientX;
             this.mouseY = e.clientY;
             this.card.style.cursor = 'grabbing';
         });
 
-        document.addEventListener('mousemove', (e) => {
+        document.addEventListener('pointermove', (e) => {
             if (this.isDragging) {
                 const deltaX = e.clientX - this.mouseX;
                 const deltaY = e.clientY - this.mouseY;
@@ -325,7 +350,7 @@ class PortfolioTerminal {
             }
         });
 
-        document.addEventListener('mouseup', () => {
+        const endDrag = () => {
             if (this.isDragging) {
                 this.isDragging = false;
                 this.card.style.cursor = 'grab';
@@ -346,7 +371,9 @@ class PortfolioTerminal {
 
                 setTimeout(returnToCenter, 1000);
             }
-        });
+        };
+        document.addEventListener('pointerup', endDrag);
+        document.addEventListener('pointercancel', endDrag);
     }
 
     // All command methods
@@ -660,7 +687,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('AI typing status:', terminal.aiTyping);
 
         // Force focus again if needed
-        if (input && !input.disabled) {
+        const touch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+        if (input && !input.disabled && !touch) {
             input.focus();
             console.log('Input focused');
         }
