@@ -1,167 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ansh Sahu - Full Stack Developer</title>
-    <link rel="stylesheet" href="style.css?v=4">
+ 
+    <!-- SEO -->
+    <title>Ansh Sahu | Full Stack Developer</title>
+    <meta name="description"
+        content="Ansh Sahu is a full stack developer. Explore his projects, skills, experience and contact details in an interactive terminal portfolio.">
+    <meta name="author" content="Ansh Sahu">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://anshsahu.tech/">
+ 
+    <!-- Open Graph and Twitter (link previews on LinkedIn, WhatsApp, X) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ansh Sahu | Full Stack Developer">
+    <meta property="og:description"
+        content="Interactive terminal portfolio of Ansh Sahu, a full stack developer.">
+    <meta property="og:url" content="https://anshsahu.tech/">
+    <meta property="og:image" content="https://anshsahu.tech/assets/profile.png">
+    <meta property="og:image:alt" content="Ansh Sahu">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Ansh Sahu | Full Stack Developer">
+    <meta name="twitter:description"
+        content="Interactive terminal portfolio of Ansh Sahu, a full stack developer.">
+    <meta name="twitter:image" content="https://anshsahu.tech/assets/profile.png">
+ 
+    <!-- Structured data: tells Google this site, GitHub and LinkedIn are the same person -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ansh Sahu",
+        "url": "https://anshsahu.tech",
+        "image": "https://anshsahu.tech/assets/profile.png",
+        "jobTitle": "Full Stack Developer",
+        "sameAs": [
+            "https://github.com/anshsahu321",
+            "https://www.linkedin.com/in/anshsahu319239"
+        ]
+    }
+    </script>
+ 
+    <!-- Fonts and styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=4">
+    <style>
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
 </head>
-
+ 
 <body>
-    <canvas id="matrixCanvas"></canvas>
+    <canvas id="matrixCanvas" aria-hidden="true"></canvas>
+ 
+    <!-- Plain text for Google and screen readers -->
+    <h1 class="sr-only">Ansh Sahu, Full Stack Developer</h1>
+    <p class="sr-only">
+        Portfolio of Ansh Sahu with sections for about, projects, skills, experience, contact, education,
+        certifications and leadership.
+    </p>
+    <noscript>
+        <p>Please turn on JavaScript to use the interactive terminal.</p>
+    </noscript>
+ 
     <div class="container">
-        <!-- ... existing content ... -->
-        <!-- Load configuration first -->
-        <script src="config.js"></script>
-        <script src="matrix-effect.js"></script>
-        <script src="script.js"></script>
-</body>
-<!-- Left Side: 3D Interactive Card -->
-<div class="left-panel">
-    <div class="card-container">
-        <div class="interactive-card" id="interactiveCard">
-            <div class="card-face front">
-                <div class="card-header">
-                    <div class="terminal-controls">
-                        <span class="control red"></span>
-                        <span class="control yellow"></span>
-                        <span class="control green"></span>
-                    </div>
-                    <div class="card-title">ansh@portfolio</div>
-                </div>
-                <div class="card-content">
-                    <div class="profile-section">
-                        <div class="avatar">
-                            <img src="assets/profile.png" alt="Ansh Sahu"
-                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+ 
+        <!-- Left side: 3D interactive card -->
+        <div class="left-panel">
+            <div class="card-container">
+                <div class="interactive-card" id="interactiveCard">
+                    <div class="card-face front">
+                        <div class="card-header">
+                            <div class="terminal-controls">
+                                <span class="control red"></span>
+                                <span class="control yellow"></span>
+                                <span class="control green"></span>
+                            </div>
+                            <div class="card-title">ansh@portfolio</div>
                         </div>
-                        <div class="profile-info">
-                            <h2>Ansh Sahu</h2>
-                            <p>Full Stack Developer</p>
-                            <div class="status-indicator">
-                                <span class="status-dot"></span>
-                                <span>Available for opportunities</span>
+                        <div class="card-content">
+                            <div class="profile-section">
+                                <div class="avatar">
+                                    <img src="assets/profile.png" alt="Ansh Sahu" decoding="async"
+                                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                                </div>
+                                <div class="profile-info">
+                                    <h2>Ansh Sahu</h2>
+                                    <p>Full Stack Developer</p>
+                                    <div class="status-indicator">
+                                        <span class="status-dot"></span>
+                                        <span>Available for opportunities</span>
+                                    </div>
+                                </div>
+                            </div>
+ 
+                            <div class="quick-stats">
+                                <div class="stat">
+                                    <span class="stat-number">2+</span>
+                                    <span class="stat-label">Years Experience</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number">10+</span>
+                                    <span class="stat-label">Projects Built</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number">10+</span>
+                                    <span class="stat-label">Technologies</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="quick-stats">
-                        <div class="stat">
-                            <span class="stat-number">2+</span>
-                            <span class="stat-label">Years Experience</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">10+</span>
-                            <span class="stat-label">Projects Built</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">10+</span>
-                            <span class="stat-label">Technologies</span>
-                        </div>
+                </div>
+ 
+                <div class="card-hint">
+                    <span>🖱️ Drag to rotate • ⌨️ Use terminal → • 🤖 AI Enhanced</span>
+                </div>
+            </div>
+        </div>
+ 
+        <!-- Right side: terminal interface -->
+        <div class="right-panel">
+            <div class="terminal-container">
+ 
+                <!-- Terminal header -->
+                <div class="terminal-header-nav">
+                    <div class="nav-commands">
+                        <span class="nav-cmd" data-cmd="help">help</span>
+                        <span class="nav-separator">|</span>
+                        <span class="nav-cmd" data-cmd="about">about</span>
+                        <span class="nav-separator">|</span>
+                        <span class="nav-cmd" data-cmd="projects">projects</span>
+                        <span class="nav-separator">|</span>
+                        <span class="nav-cmd" data-cmd="skills">skills</span>
+                        <span class="nav-separator">|</span>
+                        <span class="nav-cmd" data-cmd="experience">experience</span>
+                        <span class="nav-separator">|</span>
+                        <span class="nav-cmd" data-cmd="contact">contact</span>
+                        <span class="nav-separator">|</span>
+                        <span class="nav-cmd" data-cmd="education">education</span>
+                        <span class="nav-separator">|</span>
+                        <span class="nav-cmd" data-cmd="certifications">certifications</span>
+                        <span class="nav-separator">|</span>
+                        <span class="nav-cmd" data-cmd="leadership">leadership</span>
+                        <span class="nav-separator">|</span>
+                        <span class="nav-cmd" data-cmd="sudo">sudo</span>
+                        <span class="nav-separator">|</span>
+                        <span class="nav-cmd" data-cmd="clear">clear</span>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="card-hint">
-            <span>🖱️ Drag to rotate • ⌨️ Use terminal → • 🤖 AI Enhanced</span>
-        </div>
-    </div>
-</div>
-
-<!-- Right Side: Terminal Interface -->
-<div class="right-panel">
-    <div class="terminal-container">
-        <!-- Terminal Header -->
-        <div class="terminal-header-nav">
-            <div class="nav-commands">
-                <span class="nav-cmd" data-cmd="help">help</span>
-                <span class="nav-separator">|</span>
-                <span class="nav-cmd" data-cmd="about">about</span>
-                <span class="nav-separator">|</span>
-                <span class="nav-cmd" data-cmd="projects">projects</span>
-                <span class="nav-separator">|</span>
-                <span class="nav-cmd" data-cmd="skills">skills</span>
-                <span class="nav-separator">|</span>
-                <span class="nav-cmd" data-cmd="experience">experience</span>
-                <span class="nav-separator">|</span>
-                <span class="nav-cmd" data-cmd="contact">contact</span>
-                <span class="nav-separator">|</span>
-                <span class="nav-cmd" data-cmd="education">education</span>
-                <span class="nav-separator">|</span>
-                <span class="nav-cmd" data-cmd="certifications">certifications</span>
-                <span class="nav-separator">|</span>
-                <span class="nav-cmd" data-cmd="leadership">leadership</span>
-                <span class="nav-separator">|</span>
-                <span class="nav-cmd" data-cmd="sudo">sudo</span>
-                <span class="nav-separator">|</span>
-                <span class="nav-cmd" data-cmd="clear">clear</span>
-            </div>
-        </div>
-
-        <!-- Terminal Body -->
-        <div class="terminal-body">
-            <div class="welcome-section">
-                <div class="command-line">
-                    <span class="prompt">ansh@portfolio:~$</span>
-                    <span class="command typing-animation">whoami</span>
-                </div>
-                <div class="welcome-text">
-                    <p>Hi, I'm <span class="highlight">Ansh Sahu</span>, a Full Stack Developer.</p>
-                    <br>
-                    <p>Welcome to my <span class="highlight">AI-powered</span> interactive portfolio terminal!
-                    </p>
-                    <p>Type <span class="highlight">'help'</span> to see available commands.</p>
-                    <p>🤖 <em>AI assistance enabled - I'll help correct typos and understand your intent!</em>
-                    </p>
-                </div>
-            </div>
-
-            <div id="terminal-output" class="terminal-output">
-                <!-- Command outputs will appear here -->
-            </div>
-
-            <!-- AI Thinking Indicator -->
-            <div id="ai-thinking" class="ai-thinking-container" style="display: none;">
-                <div class="ai-thinking-content">
-                    <span class="ai-brain">🧠</span>
-                    <span class="ai-thinking-text">Let AI think...</span>
-                    <div class="ai-dots">
-                        <span>.</span><span>.</span><span>.</span>
+ 
+                <!-- Terminal body -->
+                <div class="terminal-body">
+                    <div class="welcome-section">
+                        <div class="command-line">
+                            <span class="prompt">ansh@portfolio:~$</span>
+                            <span class="command typing-animation">whoami</span>
+                        </div>
+                        <div class="welcome-text">
+                            <p>Hi, I'm <span class="highlight">Ansh Sahu</span>, a Full Stack Developer.</p>
+                            <br>
+                            <p>Welcome to my <span class="highlight">AI-powered</span> interactive portfolio terminal!</p>
+                            <p>Type <span class="highlight">'help'</span> to see available commands.</p>
+                            <p>🤖 <em>AI assistance enabled - I'll help correct typos and understand your intent!</em></p>
+                        </div>
+                    </div>
+ 
+                    <div id="terminal-output" class="terminal-output" aria-live="polite">
+                        <!-- Command outputs will appear here -->
+                    </div>
+ 
+                    <!-- AI thinking indicator -->
+                    <div id="ai-thinking" class="ai-thinking-container" style="display: none;">
+                        <div class="ai-thinking-content">
+                            <span class="ai-brain">🧠</span>
+                            <span class="ai-thinking-text">Let AI think...</span>
+                            <div class="ai-dots">
+                                <span>.</span><span>.</span><span>.</span>
+                            </div>
+                        </div>
+                    </div>
+ 
+                    <!-- Input line -->
+                    <div class="input-line">
+                        <span class="prompt">ansh@portfolio:~$</span>
+                        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off"
+                            autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Terminal command"
+                            placeholder="Type a command here... (AI will help with typos!)">
+                        <span class="cursor">|</span>
                     </div>
                 </div>
-            </div>
-
-            <!-- Input Line -->
-            <div class="input-line">
-                <span class="prompt">ansh@portfolio:~$</span>
-                <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false"
-                    placeholder="Type a command here... (AI will help with typos!)">
-                <span class="cursor">|</span>
-            </div>
-        </div>
-
-        <!-- Terminal Footer -->
-        <div class="terminal-footer">
-            <div class="status-bar">
-                <span class="status-item">[Interactive 3D Card]</span>
-                <span class="status-item">AI Enhanced Terminal</span>
-                <span class="status-item">Next.js Portfolio</span>
-                <span class="status-item" id="ai-status">🤖 AI Ready</span>
+ 
+                <!-- Terminal footer -->
+                <div class="terminal-footer">
+                    <div class="status-bar">
+                        <span class="status-item">[Interactive 3D Card]</span>
+                        <span class="status-item">AI Enhanced Terminal</span>
+                        <span class="status-item">Next.js Portfolio</span>
+                        <span class="status-item" id="ai-status">🤖 AI Ready</span>
+                    </div>
+                </div>
+ 
             </div>
         </div>
+ 
     </div>
-</div>
-</div>
-
-<!-- Load configuration first -->
-<script src="config.js"></script>
-<script src="script.js"></script>
+ 
+    <!-- Scripts load once, config first -->
+    <script src="config.js"></script>
+    <script src="matrix-effect.js"></script>
+    <script src="script.js"></script>
 </body>
-
+ 
 </html>
