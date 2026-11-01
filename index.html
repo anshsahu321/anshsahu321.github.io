@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
- 
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+    <meta name="theme-color" content="#000000">
+
     <!-- SEO -->
     <title>Ansh Sahu | Full Stack Developer</title>
     <meta name="description"
@@ -12,7 +13,7 @@
     <meta name="author" content="Ansh Sahu">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://anshsahu.tech/">
- 
+
     <!-- Open Graph and Twitter (link previews on LinkedIn, WhatsApp, X) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Ansh Sahu | Full Stack Developer">
@@ -26,7 +27,7 @@
     <meta name="twitter:description"
         content="Interactive terminal portfolio of Ansh Sahu, a full stack developer.">
     <meta name="twitter:image" content="https://anshsahu.tech/assets/profile.png">
- 
+
     <!-- Structured data: tells Google this site, GitHub and LinkedIn are the same person -->
     <script type="application/ld+json">
     {
@@ -42,13 +43,13 @@
         ]
     }
     </script>
- 
+
     <!-- Fonts and styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
     <style>
         .sr-only {
             position: absolute;
@@ -63,10 +64,10 @@
         }
     </style>
 </head>
- 
+
 <body>
     <canvas id="matrixCanvas" aria-hidden="true"></canvas>
- 
+
     <!-- Plain text for Google and screen readers -->
     <h1 class="sr-only">Ansh Sahu, Full Stack Developer</h1>
     <p class="sr-only">
@@ -76,9 +77,9 @@
     <noscript>
         <p>Please turn on JavaScript to use the interactive terminal.</p>
     </noscript>
- 
+
     <div class="container">
- 
+
         <!-- Left side: 3D interactive card -->
         <div class="left-panel">
             <div class="card-container">
@@ -107,7 +108,7 @@
                                     </div>
                                 </div>
                             </div>
- 
+
                             <div class="quick-stats">
                                 <div class="stat">
                                     <span class="stat-number">2+</span>
@@ -125,17 +126,17 @@
                         </div>
                     </div>
                 </div>
- 
+
                 <div class="card-hint">
                     <span>🖱️ Drag to rotate • ⌨️ Use terminal → • 🤖 AI Enhanced</span>
                 </div>
             </div>
         </div>
- 
+
         <!-- Right side: terminal interface -->
         <div class="right-panel">
             <div class="terminal-container">
- 
+
                 <!-- Terminal header -->
                 <div class="terminal-header-nav">
                     <div class="nav-commands">
@@ -162,7 +163,7 @@
                         <span class="nav-cmd" data-cmd="clear">clear</span>
                     </div>
                 </div>
- 
+
                 <!-- Terminal body -->
                 <div class="terminal-body">
                     <div class="welcome-section">
@@ -178,11 +179,11 @@
                             <p>🤖 <em>AI assistance enabled - I'll help correct typos and understand your intent!</em></p>
                         </div>
                     </div>
- 
+
                     <div id="terminal-output" class="terminal-output" aria-live="polite">
                         <!-- Command outputs will appear here -->
                     </div>
- 
+
                     <!-- AI thinking indicator -->
                     <div id="ai-thinking" class="ai-thinking-container" style="display: none;">
                         <div class="ai-thinking-content">
@@ -193,17 +194,17 @@
                             </div>
                         </div>
                     </div>
- 
+
                     <!-- Input line -->
                     <div class="input-line">
                         <span class="prompt">ansh@portfolio:~$</span>
                         <input type="text" id="terminal-input" class="terminal-input" autocomplete="off"
-                            autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Terminal command"
+                            autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send" aria-label="Terminal command"
                             placeholder="Type a command here... (AI will help with typos!)">
                         <span class="cursor">|</span>
                     </div>
                 </div>
- 
+
                 <!-- Terminal footer -->
                 <div class="terminal-footer">
                     <div class="status-bar">
@@ -213,16 +214,16 @@
                         <span class="status-item" id="ai-status">🤖 AI Ready</span>
                     </div>
                 </div>
- 
+
             </div>
         </div>
- 
+
     </div>
- 
+
     <!-- Scripts load once, config first -->
-    <script src="config.js"></script>
-    <script src="matrix-effect.js"></script>
-    <script src="script.js"></script>
+    <script src="config.js?v=2"></script>
+    <script src="matrix-effect.js?v=2"></script>
+    <script src="script.js?v=2"></script>
 </body>
- 
+
 </html>
