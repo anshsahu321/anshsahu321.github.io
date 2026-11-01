@@ -539,22 +539,124 @@ body {
 }
 
 /* Responsive Design */
+
+/* Phones: 100vh includes the area behind the address bar, 100dvh does not.
+   This is why the footer was cut off. */
+@supports (height: 100dvh) {
+
+    body,
+    .container {
+        height: 100dvh;
+    }
+}
+
+body {
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.right-panel,
+.terminal-container,
+.terminal-body {
+    min-height: 0;
+}
+
+.interactive-card {
+    touch-action: none;
+}
+
+.nav-cmd {
+    user-select: none;
+}
+
+.output-content pre {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
 @media (max-width: 1024px) {
     .container {
         flex-direction: column;
     }
 
+    /* Card becomes a compact strip on top instead of a fixed box that clips its content */
     .left-panel {
         width: 100%;
-        height: 300px;
-        flex-direction: row;
-        justify-content: center;
-        padding: 20px;
+        height: auto;
+        flex: 0 0 auto;
+        padding: 10px 12px;
+        border-right: none;
+        border-bottom: 2px solid #00ff00;
+    }
+
+    .card-container {
+        width: 100%;
+        gap: 0;
     }
 
     .interactive-card {
-        width: 250px;
-        height: 200px;
+        width: 100%;
+        max-width: 360px;
+        height: auto;
+    }
+
+    .card-face {
+        height: auto;
+        padding: 12px 14px;
+    }
+
+    .card-header {
+        margin-bottom: 10px;
+        padding-bottom: 8px;
+        gap: 10px;
+    }
+
+    .card-title {
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .profile-section {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        text-align: left;
+        margin-bottom: 10px;
+    }
+
+    .avatar {
+        width: 64px;
+        height: 64px;
+        flex-shrink: 0;
+        margin: 0;
+    }
+
+    .profile-info h2 {
+        font-size: 18px;
+        margin-bottom: 2px;
+    }
+
+    .profile-info p {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .status-indicator {
+        justify-content: flex-start;
+        font-size: 11px;
+    }
+
+    .quick-stats {
+        gap: 8px;
+    }
+
+    .stat-number {
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+
+    .stat-label {
+        font-size: 10px;
     }
 
     .card-hint {
@@ -563,35 +665,85 @@ body {
 }
 
 @media (max-width: 768px) {
-    .left-panel {
-        height: 250px;
-    }
 
-    .interactive-card {
-        width: 200px;
-        height: 160px;
-    }
-
-    .card-face {
-        padding: 15px;
-    }
-
-    .profile-info h2 {
-        font-size: 20px;
-    }
-
-    .avatar-placeholder {
-        width: 60px;
-        height: 60px;
-        font-size: 18px;
+    /* Command menu becomes one swipeable row with bigger tap targets */
+    .terminal-header-nav {
+        padding: 2px 8px;
     }
 
     .nav-commands {
-        font-size: 11px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 0;
+        font-size: 13px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-commands::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-separator {
+        display: none;
+    }
+
+    .nav-cmd {
+        padding: 10px 12px;
+        white-space: nowrap;
+        flex-shrink: 0;
     }
 
     .terminal-body {
-        padding: 15px;
+        padding: 12px;
+    }
+
+    .welcome-section {
+        margin-bottom: 12px;
+    }
+
+    .command-line,
+    .output-block,
+    .input-line {
+        font-size: 13px;
+    }
+
+    .output-content {
+        padding-left: 8px;
+        overflow-wrap: anywhere;
+    }
+
+    /* 16px stops iPhones from zooming into the page when the input is focused */
+    .terminal-input {
+        font-size: 16px;
+        min-width: 0;
+        margin-left: 6px;
+    }
+
+    .input-line .prompt {
+        white-space: nowrap;
+    }
+
+    /* The real caret is enough on a phone */
+    .cursor {
+        display: none;
+    }
+
+    .terminal-footer {
+        padding: 6px 12px;
+    }
+
+    .status-bar {
+        flex-wrap: wrap;
+        gap: 2px 12px;
+        font-size: 11px;
+    }
+}
+
+/* Phone held sideways: no room for the card, give everything to the terminal */
+@media (max-width: 1024px) and (max-height: 500px) and (orientation: landscape) {
+    .left-panel {
+        display: none;
     }
 }
 
